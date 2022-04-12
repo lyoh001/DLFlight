@@ -1,0 +1,136 @@
+<html>
+
+<head>
+    <link href="app/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>AzureDL</title>
+</head>
+
+<body>
+    <header id="header">
+        <h1><b>DEEP</b> LEARNING</h1>
+        <hr>
+        A Multi-Regression Prediction Model powered by Deep Neural Network
+        <hr>
+    </header>
+    <main>
+        <article id="mainLeft">
+            <section>
+                <h2>NOTEBOOK</h2>
+                <p>
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <a
+                        href="https://github.com/lyoh001/DLFlight/blob/main/notebook/notebook.ipynb">DLFlight/blob/main/notebook/notebook.ipynb</a>
+                </p>
+            </section>
+            <section>
+                <h2>DATASET</h2>
+                <p>
+                    <i class="fab fa-kaggle" aria-hidden="true"></i>
+                    <a
+                        href="https://www.kaggle.com/datasets/shubhambathwal/flight-price-prediction">flight-price-prediction</a>
+                </p>
+                <p></p>
+            </section>
+            <section>
+                <h2>SKILLS</h2>
+                <p>Python, Machine Learning, Deep Learning, DevOps, MLOps, IaC, AWS, Azure</p>
+            </section>
+            <section>
+                <h2>CONTACT</h2>
+                <p>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:lyoh001@hotmail.com">lyoh001@hotmail.com</a>
+                </p>
+                <p>
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <a href="https://github.com/lyoh001">github.com/lyoh001</a>
+                </p>
+                <p>
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    <a href="https://linkedin.com/lyoh001">linkedin.com/lyoh001</a>
+                </p>
+            </section>
+        </article>
+        <article id="mainRight">
+            <section>
+                <h2>ABOUT</h2>
+                <p>The objective of the study is to analyse the flight booking dataset obtained from “Ease My Trip”
+                    website and to conduct various statistical hypothesis tests in order to get meaningful information
+                    from it. The 'Linear Regression' statistical algorithm would be used to train the dataset and
+                    predict a continuous target variable. 'Easemytrip' is an internet platform for booking flight
+                    tickets, and hence a platform that potential passengers use to buy tickets. A thorough study of the
+                    data will aid in the discovery of valuable insights that will be of enormous value to passengers.
+
+                    The various features of the cleaned dataset are explained below:
+                    1) Airline: The name of the airline company is stored in the airline column. It is a categorical
+                    feature having 6 different airlines.
+                    2) Flight: Flight stores information regarding the plane's flight code. It is a categorical feature.
+                    3) Source City: City from which the flight takes off. It is a categorical feature having 6 unique
+                    cities.
+                    4) Departure Time: This is a derived categorical feature obtained created by grouping time periods
+                    into bins. It stores information about the departure time and have 6 unique time labels.
+                    5) Stops: A categorical feature with 3 distinct values that stores the number of stops between the
+                    source and destination cities.
+                    6) Arrival Time: This is a derived categorical feature created by grouping time intervals into bins.
+                    It has six distinct time labels and keeps information about the arrival time.
+                    7) Destination City: City where the flight will land. It is a categorical feature having 6 unique
+                    cities.
+                    8) Class: A categorical feature that contains information on seat class; it has two distinct values:
+                    Business and Economy.
+                    9) Duration: A continuous feature that displays the overall amount of time it takes to travel
+                    between cities in hours.
+                    10)Days Left: This is a derived characteristic that is calculated by subtracting the trip date by
+                    the booking date.
+                    11) Price: Target variable stores information of the ticket price.
+                </p>
+            </section>
+            <section>
+                <h2>PREDICTION</h2>
+                <h3><b>FEATURES</b></h3>
+                <p>
+                    These are the features of the model that will be used to make a prediction.
+                </p>
+                <ul>
+                    <li>airline: <input id="feature1"></li>
+                    <li>source_city: <input id="feature2"></li>
+                    <li>departure_time: <input id="feature3"></li>
+                    <li>stops: <input id="feature4"></li>
+                    <li>arrival_time: <input id="feature5"></li>
+                    <li>destination_city: <input id="feature6"></li>
+                    <li>class: <input id="feature7"></li>
+                    <li>duration: <input id="feature8"></li>
+                    <li>days_left: <input id="feature9"></li>
+                    <button onclick="predict();">predict</button>
+                </ul>
+                <p></p>
+                <p>Prediction: $<b id="prediction">...</b></p>
+                <script>
+                    function predict() {
+                        var feature1 = document.getElementById("feature1").value;
+                        var feature2 = document.getElementById("feature2").value;
+                        var feature3 = document.getElementById("feature3").value;
+                        var feature4 = document.getElementById("feature4").value;
+                        var feature5 = document.getElementById("feature5").value;
+                        var feature6 = document.getElementById("feature6").value;
+                        var feature7 = document.getElementById("feature7").value;
+                        var feature8 = document.getElementById("feature8").value;
+                        var feature9 = document.getElementById("feature9").value;
+                        var http = new XMLHttpRequest();
+                        http.open("POST", "api/dlflight", true);
+                        http.setRequestHeader("Content-Type", "application/json");
+                        http.onreadystatechange = function () {
+                            if (http.readyState == 4 && http.status == 200) {
+                                var response = http.responseText
+                                document.getElementById("prediction").innerHTML = response;
+                            }
+                        }
+                        http.send(JSON.stringify({ "airline": [feature1], "source_city": [feature2], "departure_time": [feature3], "stops": [feature4], "arrival_time": [feature5], "destination_city": [feature6], "class": [feature7], "duration": [feature8], "days_left": [feature9] }));
+                    }
+                </script>
+            </section>
+        </article>
+    </main>
+</body>
+
+</html>
